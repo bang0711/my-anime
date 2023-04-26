@@ -1,10 +1,13 @@
+import List from "@/app/component/List";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import List from "./component/List";
 
-type Props = {};
-
+type Props = {
+  params: {
+    page: number;
+  };
+};
 async function fetchAnimeData(link: string) {
   const res = await fetch(link);
   if (!res.ok) {
@@ -13,10 +16,9 @@ async function fetchAnimeData(link: string) {
   const json = await res.json();
   return json.data;
 }
-
-async function getData() {
+async function getData(page: number) {
   const res = await fetch(
-    "https://kitsu.io/api/edge/anime?page[limit]=20&page[offset]=0"
+    `https://kitsu.io/api/edge/anime?page[limit]=20&page[offset]=${page}`
   );
   if (!res.ok) {
     throw new Error("Failed to fetch anime list");
@@ -28,9 +30,8 @@ async function getData() {
   );
   return animeData;
 }
-
-async function HomePage({}: Props) {
-  const animeData = await getData();
+async function PaginationPage({ params: { page } }: Props) {
+  const animeData = await getData(page * 20);
   return (
     <>
       <div className="grid grid-cols-2 gap-4 p-5 sm:grid-cols-4 md:grid-cols-5">
@@ -60,4 +61,4 @@ async function HomePage({}: Props) {
   );
 }
 
-export default HomePage;
+export default PaginationPage;
