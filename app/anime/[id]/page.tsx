@@ -7,7 +7,7 @@ type Props = {
     id: string;
   };
 };
-export async function getData(id: string) {
+async function getData(id: string) {
   const res = await fetch(`https://kitsu.io/api/edge/anime/${id}`);
   if (!res.ok) {
     throw new Error("failed to get data");
