@@ -23,7 +23,7 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
-    "@netlify/plugin-nextjs": "^4.29.5-appdir.0",
+    "@netlify/plugin-nextjs": "^2.0.1",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.2.7"
   }
